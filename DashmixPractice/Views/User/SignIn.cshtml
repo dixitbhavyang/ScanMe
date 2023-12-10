@@ -1,0 +1,239 @@
+﻿@model DashmixPractice.Models.User
+
+@{
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+<head>
+    <script>
+
+        function onSignInComplete( data )
+        {
+            debugger;
+            if ( data.responseText == "false" )
+            {
+                //alert( "Hi" );
+                var div = document.querySelector( "#signInResponse" );
+                div.style.display = "block";
+            }
+            else
+            {
+                location.href = "/Home/Index/";
+            }
+        }
+
+        function onSignUpComeplete( data )
+        {
+            debugger;
+            if ( data.responseText == "false" )
+            {
+                var div = document.querySelector( "#signUpResponse" );
+                div.style.display = "block";
+            } else
+            {
+                location.href = "/Home/Index";
+            }
+        }
+    </script>
+</head>
+<body>
+    <!-- Page Container -->
+    <div id="page-container">
+        <!-- Main Container -->
+        <main id="main-container">
+            <!-- Page Content -->
+            <div class="bg-image" style="background-image:url(~/assets/media/photos/33418295_8057541.jpg)">
+                <div class="row g-0 justify-content-center bg-primary-dark-op">
+                    <div class="hero-static col-sm-8 col-md-6 col-xl-4 d-flex align-items-center p-2 px-sm-0">
+
+                        <!-- START FORM BLOCK -->
+                        <div class="block block-transparent block-rounded w-100 mb-0 overflow-hidden">
+                            <div class="block-content block-content-full px-lg-5 px-xl-6 py-4 py-md-5 py-lg-6 bg-body-extra-light">
+                                <!-- Header -->
+                                <div class="mb-2 text-center">
+                                    <a class="link-fx fw-bold fs-1" href="#">
+                                        <span class="text-dark">Scan</span><span class="text-primary">Me</span><i class="fa fa-qrcode ms-1"></i>
+                                    </a>
+                                    <p class="text-uppercase fw-bold fs-sm text-muted" id="title">Sign In</p>
+                                </div>
+                                <!-- END Header -->
+                                <!--SIGN-IN FORM START-->
+                                <div id="signInForm">
+                                    <!-- Sign In Form -->
+                                    <!-- jQuery Validation (.js-validation-signin class is initialized in js/pages/op_auth_signin.min.js which was auto compiled from _js/pages/op_auth_signin.js) -->
+                                    <!-- For more info and examples you can check out https://github.com/jzaefferer/jquery-validation -->
+                                    @using (Ajax.BeginForm("SignIn", null, new AjaxOptions { HttpMethod = "POST", OnComplete = "onSignInComplete" }, new { @class = "js-validation-signin" }))
+                                    {
+                                        <div class="mb-4">
+                                            <div class="input-group input-group-lg">
+                                                @Html.TextBoxFor(model => model.Username, new { @class = "form-control", placeholder = "Username" })
+                                                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "txt-danger small" })
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-user-circle"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="mb-4">
+                                            <div class="input-group input-group-lg">
+                                                @Html.TextBoxFor(model => model.Password, new { @class = "form-control", placeholder = "Password", type = "password", maxlength = "8" })
+                                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "txt-danger small" })
+                                                <span class="input-group-text" id="showPassword">
+                                                    <i class="fa fa-eye-slash"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="d-sm-flex justify-content-sm-between align-items-sm-center text-center text-sm-start mb-4">
+                                            <div class="form-check-inline">
+                                                @Html.CheckBoxFor(model => model.RememberMe, new { @class = "form-check-input" })
+                                                <label class="form-check-label" for="login-remember-me">Remember Me</label>
+                                            </div>
+                                        </div>
+                                        <div class="mb-4">
+                                            <div id="signInResponse" style="display:none;">
+                                                <p class="text-danger fw-semibold small">Incorrect Password or Username . . .</p>
+                                            </div>
+                                            <button type="submit" class="btn w-100 btn-lg btn-hero btn-primary">
+                                                <i class="fa fa-fw fa-sign-in-alt opacity-50 me-1"></i> Sign In
+                                            </button>
+                                            <p class="mt-3 mb-0 d-lg-flex justify-content-lg-between">
+                                                <a type="button" class="btn btn-sm btn-alt-secondary d-block d-lg-inline-block mb-1" href="#" id="forgetPassword">
+                                                    <i class="fa fa-exclamation-triangle opacity-50 me-1"></i> Forgot password
+                                                </a>
+                                                <a type="button" class="newAccount btn btn-sm btn-alt-secondary d-block d-lg-inline-block mb-1" href="#" id="newAccount">
+                                                    <i class="fa fa-plus opacity-50 me-1"></i> New Account
+                                                </a>
+                                            </p>
+                                        </div>
+                                    }
+                                </div>
+                                <!--SIGN-IN FORM END-->
+                                <!--SIGN-UP FORM START-->
+                                <div id="signUpForm" hidden>
+                                    <!-- Sign Up Form -->
+                                    <!-- jQuery Validation (.js-validation-signup class is initialized in js/pages/op_auth_signup.min.js which was auto compiled from _js/pages/op_auth_signup.js) -->
+                                    <!-- For more info and examples you can check out https://github.com/jzaefferer/jquery-validation -->
+                                    @using (Ajax.BeginForm("SignUp", null, new AjaxOptions { HttpMethod = "POST", OnComplete = "onSignUpComeplete" }, new { @class = "js-validation-signup" }))
+                                    {
+                                        <div class="mb-4">
+                                            <label class="form-label">Your Profile Picture</label>
+                                            <div class="push">
+                                                <img class="img-avatar" id="profilePictureShow" src="/assets/media/avatars/avatar10.jpg" alt="">
+                                                <button type="button" id="clearPrfofilePicture" class="btn btn-sm text-danger">Remove <i class="fa-solid fa-2 fa-ban"></i> </button>
+                                            </div>
+                                            <label class="form-label" for="dm-profile-edit-avatar">Choose your Profile picture</label>
+                                            <input class="form-control" type="file" id="profilePicture" name="profilePicture">
+                                        </div>
+                                        <div class="mb-4">
+                                            <div class="input-group input-group-lg">
+                                                @Html.TextBoxFor(model => model.Name, new { @class = "form-control", placeholder = "Name" })
+                                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "txt-danger small" })
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-user"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="mb-4">
+                                            <div class="input-group input-group-lg">
+                                                @Html.TextBoxFor(model => model.Username, new { @class = "form-control", placeholder = "Username" })
+                                                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "txt-danger small" })
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-user-circle"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="mb-4">
+                                            <div class="input-group input-group-lg">
+                                                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Email" })
+                                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "txt-danger small" })
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-envelope-open"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="mb-4">
+                                            <div class="input-group input-group-lg">
+                                                @Html.TextBoxFor(model => model.Password, new { @class = "form-control", placeholder = "Password", type = "password", maxlength = "8" })
+                                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "txt-danger small" })
+                                                <span class="input-group-text" id="showPasswordSignUp">
+                                                    <i class="fa fa-eye-slash"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="mb-4">
+                                            <div class="input-group input-group-lg">
+                                                @Html.TextBoxFor(model => model.ConfirmPassword, new { @class = "form-control", placeholder = "Password Confirm", type = "Password", maxlength = "8" })
+                                                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "txt-danger small" })
+                                                <span class="input-group-text" id="showConfirmPassword">
+                                                    <i class="fa fa-eye-slash"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="d-sm-flex justify-content-sm-between align-items-sm-center mb-4 bg-body rounded py-2 px-3">
+                                            <div class="form-check">
+                                                <input type="checkbox" class="form-check-input" id="signup-terms" name="signup-terms">
+                                                <label class="form-check-label" for="signup-terms">I agree</label>
+                                                <a class="fw-semibold fs-sm" href="#" data-bs-toggle="modal" data-bs-target="#modal-terms">Terms &amp; Conditions</a>
+                                            </div>
+                                        </div>
+                                        <div class="mb-4">
+                                            <div id="signUpResponse" style="display:none;">
+                                                <p class="text-danger fw-semibold small">Sorry there is an Exception Occured, Try again Later . . .</p>
+                                            </div>
+                                            <button type="submit" class="btn w-100 btn-lg btn-hero btn-primary">
+                                                <i class="fa fa-fw fa-plus opacity-50 me-1"></i> Sign Up
+                                            </button>
+                                            <p class="mt-3 mb-0 d-lg-flex justify-content-lg-between">
+                                                <a type="button" class="signIn btn btn-sm btn-alt-secondary d-block d-lg-inline-block mb-1" href="#" id="signIn">
+                                                    <i class="fa fa-sign-in-alt opacity-50 me-1"></i> Sign In
+                                                </a>
+                                            </p>
+                                        </div>
+                                    }
+                                </div>
+                                <!--SIGN-UP FORM END-->
+                                <!--FORGET-PASSWORD FORM START-->
+                                <div id="forgetPasswordForm" hidden>
+                                    @using (Ajax.BeginForm("ForgetPassword", null, new AjaxOptions { HttpMethod = "POST", OnBegin = "onBegin", OnSuccess = "onSuccess" }, new { @class = "js-validation-reminder" }))
+                                    {
+                                        <div class="mb-4">
+                                            <div class="input-group input-group-lg">
+                                                <input type="text" class="form-control" id="reminder-credential" name="reminder-credential" placeholder="Username or Email">
+                                                <span class="input-group-text">
+                                                    <i class="fa fa-user-circle"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="text-center mb-4">
+                                            <button type="submit" class="btn w-100 btn-lg btn-hero btn-primary">
+                                                <i class="fa fa-fw fa-reply opacity-50 me-1"></i> Password Reminder
+                                            </button>
+                                            <p class="mt-3 mb-0 d-lg-flex justify-content-lg-between">
+                                                <a class="signIn btn btn-sm btn-alt-secondary d-block d-lg-inline-block mb-1" href="#" id="signIn">
+                                                    <i class="fa fa-sign-in-alt opacity-50 me-1"></i> Sign In
+                                                </a>
+                                                <a class="newAccount btn btn-sm btn-alt-secondary d-block d-lg-inline-block mb-1" href="#" id="newAccount">
+                                                    <i class="fa fa-plus opacity-50 me-1"></i> New Account
+                                                </a>
+                                            </p>
+                                        </div>
+                                    }
+                                </div>
+                                <!--FORGET-PASSWORD FORM END-->
+                            </div>
+                        </div>
+                        <!--END FORM BLOCK -->
+                    </div>
+                </div>
+            </div>
+            <!-- END Page Content -->
+
+        </main>
+        <!-- END Main Container -->
+    </div>
+    <!-- END Page Container -->
+    <!--
+      Dashmix JS
+
+      Core libraries and functionality
+      webpack is putting everything together at ~/assets/_js/main/app.js
+    -->
+</body>

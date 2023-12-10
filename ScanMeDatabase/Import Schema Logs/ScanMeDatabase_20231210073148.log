@@ -1,0 +1,77 @@
+12/10/2023 1:01:48 PM	This log contains information about the import schema operation into project 'ScanMeDatabase' on computer 'VICKY' by user 'C.E.H V10'.
+12/10/2023 1:01:48 PM	Import of database schema has started.
+12/10/2023 1:02:01 PM	Gathering database options
+12/10/2023 1:02:01 PM	Gathering users
+12/10/2023 1:02:01 PM	Gathering roles
+12/10/2023 1:02:01 PM	Gathering application roles
+12/10/2023 1:02:01 PM	Gathering role memberships
+12/10/2023 1:02:01 PM	Gathering filegroups
+12/10/2023 1:02:01 PM	Gathering full-text catalogs
+12/10/2023 1:02:01 PM	Gathering assemblies
+12/10/2023 1:02:01 PM	Gathering certificates
+12/10/2023 1:02:01 PM	Gathering asymmetric keys
+12/10/2023 1:02:01 PM	Gathering symmetric keys
+12/10/2023 1:02:01 PM	Gathering encrypted symmetric keys
+12/10/2023 1:02:01 PM	Gathering schemas
+12/10/2023 1:02:10 PM	Gathering XML schema collections
+12/10/2023 1:02:10 PM	Gathering user-defined data types
+12/10/2023 1:02:10 PM	Gathering user-defined types
+12/10/2023 1:02:10 PM	Gathering table types
+12/10/2023 1:02:10 PM	Gathering unique keys for table types
+12/10/2023 1:02:10 PM	Gathering primary keys for table types
+12/10/2023 1:02:10 PM	Gathering indexes for table types
+12/10/2023 1:02:10 PM	Gathering check constraints for table types
+12/10/2023 1:02:10 PM	Gathering default constraints for table types
+12/10/2023 1:02:10 PM	Gathering partition functions
+12/10/2023 1:02:10 PM	Gathering partition schemes
+12/10/2023 1:02:10 PM	Gathering functions
+12/10/2023 1:02:10 PM	Gathering encrypted functions
+12/10/2023 1:02:10 PM	Gathering aggregates
+12/10/2023 1:02:10 PM	Gathering procedures
+12/10/2023 1:02:10 PM	Gathering encrypted procedures
+12/10/2023 1:02:10 PM	Gathering tables
+12/10/2023 1:02:10 PM	Gathering primary keys
+12/10/2023 1:02:10 PM	Gathering unique constraints
+12/10/2023 1:02:10 PM	Gathering foreign keys
+12/10/2023 1:02:10 PM	Gathering default constraints
+12/10/2023 1:02:10 PM	Gathering check constraints
+12/10/2023 1:02:10 PM	Gathering views
+12/10/2023 1:02:10 PM	Gathering encrypted views
+12/10/2023 1:02:10 PM	Gathering indexes
+12/10/2023 1:02:11 PM	Gathering statistics
+12/10/2023 1:02:11 PM	Gathering full-text index stoplists
+12/10/2023 1:02:11 PM	Gathering search property lists
+12/10/2023 1:02:11 PM	Gathering search properties
+12/10/2023 1:02:11 PM	Gathering full-text indexes
+12/10/2023 1:02:11 PM	Gathering column store indexes
+12/10/2023 1:02:11 PM	Gathering spatial indexes
+12/10/2023 1:02:11 PM	Gathering XML indexes
+12/10/2023 1:02:11 PM	Gathering Selective XML indexes
+12/10/2023 1:02:11 PM	Gathering encrypted triggers
+12/10/2023 1:02:11 PM	Gathering triggers
+12/10/2023 1:02:11 PM	Gathering encrypted and clr ddl triggers
+12/10/2023 1:02:11 PM	Gathering ddl triggers
+12/10/2023 1:02:11 PM	Gathering synonyms
+12/10/2023 1:02:11 PM	Gathering defaults
+12/10/2023 1:02:11 PM	Gathering data constraint uddt bindings
+12/10/2023 1:02:11 PM	Gathering rules
+12/10/2023 1:02:11 PM	Gathering data constraint uddt bindings
+12/10/2023 1:02:11 PM	Gathering message types
+12/10/2023 1:02:11 PM	Gathering queues
+12/10/2023 1:02:11 PM	Gathering contracts
+12/10/2023 1:02:11 PM	Gathering services
+12/10/2023 1:02:11 PM	Gathering event notifications
+12/10/2023 1:02:11 PM	Gathering remote service bindings
+12/10/2023 1:02:11 PM	Gathering broker priorities
+12/10/2023 1:02:11 PM	Gathering signatures
+12/10/2023 1:02:11 PM	Gathering data compression options
+12/10/2023 1:02:11 PM	Gathering sequence types
+12/10/2023 1:02:11 PM	Gathering extended properties
+12/10/2023 1:02:11 PM	Gathering credentials
+12/10/2023 1:02:11 PM	Gathering logins
+12/10/2023 1:02:11 PM	Gathering server audits
+12/10/2023 1:02:13 PM	Scanning project for duplicate elements
+12/10/2023 1:02:17 PM	Finished duplicate element processing
+12/10/2023 1:02:17 PM	Finished importing database.
+12/10/2023 1:02:17 PM	A summary of the import was saved to the following location: C:\Users\C.E.H V10\documents\visual studio 2015\Projects\MVC New\DashmixPractice\ScanMeDatabase\Import Schema Logs\ScanMeDatabase_20231210073148.log
+12/10/2023 1:02:17 PM	Click Finish to continue...
