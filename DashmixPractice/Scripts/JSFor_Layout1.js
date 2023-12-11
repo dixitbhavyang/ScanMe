@@ -1,42 +1,5 @@
 ﻿$( document ).ready( function ()
 {
-    $( document ).on("click","#btnDashboard",function ()
-    {
-        $.ajax( {
-            url: "/Home/Index", success: function ( result )
-            {
-                $( "#main-container" ).html( result );
-            }
-        } );
-
-    } );
-
-    $( document ).on("click","#btnSocialMediaLinks",function ()
-    {
-        $.ajax( {
-            url: "/Home/SocialmediaLinks", success: function ( result )
-            {
-                $("#btnSocialMediaLinks").addClass("active");
-                $("#btnSettings").removeClass("active");
-                $( "#main-container" ).html( result );
-            }
-        } );
-
-    } );
-
-    $( document ).on("click","#btnSettings",function ()
-    {
-        $.ajax( {
-            url: "/Home/Settings", success: function ( result )
-            {
-                $("#btnSettings").addClass("active");
-                $("#btnSocialMediaLinks").removeClass("active");
-                $( "#main-container" ).html( result );
-            }
-        } );
-
-    } );
-
 
     /// START PROFILE PICTURE ///
     $( document ).on("change", "#ProfilePicture", function ( e )
