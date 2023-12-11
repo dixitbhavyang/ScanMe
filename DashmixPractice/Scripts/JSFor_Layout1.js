@@ -166,31 +166,52 @@
         {
             var formData = new FormData($( "#updateProfileForm" )[0] );
             formData.append( "ProfilePicturePath", $( "#ProfilePicturePath" ).attr( "src" ) );
-
+            var previousProfilePicPath = $( "#ProfilePicturePath" ).attr( "src" );
             postMethodWithFormData( "/User/UpdateProfile", formData,
                     function ( s )
                     {
                         debugger;
                         //alert( s );
-                        if ( s == "Updated Successfully" )
+                        if ( s == true)
                         {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Success!',
+                                text: 'Updated Successfully.',
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'OK'
+                            });
                             $(".imgProfilePic").attr("src",$("#ProfilePicturePath").attr("src"));
-                        }
-                        else if ( s == "No Changes" )
-                        {
-                            var div = document.querySelector( "#updateProfileError" );
-                            div.style.display = "none";
+                            //var div = document.querySelector( "#updateProfileError" );
+                            //div.style.display = "none";
                         }
                         else
                         {
-                            var div = document.querySelector( "#updateProfileError" );
-                            div.style.display = "block";
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'Oops...',
+                                text: 'There is an Error, Please Try again Later!',
+                                confirmButtonColor: '#d33',
+                                confirmButtonText: 'OK',
+                                allowOutsideClick: false
+                            });
+                            $("ProfilePicturePath").attr("src",previousProfilePicPath);
+                            $("#ProfilePicture").val("");
                         }
                     }
                     ,
                     function ( e )
                     {
-                        alert( e );
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Oops...',
+                            text: 'There is an Error, Please Try again Later!',
+                            confirmButtonColor: '#d33',
+                            confirmButtonText: 'OK',
+                            allowOutsideClick: false
+                        });
+                        $("ProfilePicturePath").attr("src",previousProfilePicPath);
+                        $("#ProfilePicture").val("");
                     }
             );
         }
@@ -242,31 +263,93 @@
                     {
                         debugger;
                         //alert( res );
-                        if ( res == "Updated Successfully" )
+                        if ( res == true)
                         {
-                            location.href = "/User/SignIn";
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Password Updated Successfully !',
+                                text: 'You have to Login again with New Password',
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'OK',
+                                allowOutsideClick: false
+                            }).then((result) => {
+                                
+                                if (result.isConfirmed) {
+                                    location.href = "/User/SignIn";
+                                }
+                            });
                         }
                         else if ( res == "Incorrect Password" )
                         {
-                            var div = document.querySelector( "#incorrectPassword" );
-                            div.style.display = "block";
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Incorrect Password !',
+                                text: 'Check your Password!',
+                                confirmButtonColor: '#d33',
+                                confirmButtonText: 'OK',
+                                allowOutsideClick: false
+                            });
+
                         }
                         else
                         {
-                            var div = document.querySelector( "#incorrectPassword" );
-                            div.style.display = "none";
+                            Swal.fire({
+                                icon: 'warning',
+                                title: 'Oops...',
+                                text: 'There is an Error, Please Try again Later!',
+                                confirmButtonColor: '#d33',
+                                confirmButtonText: 'OK',
+                                allowOutsideClick: false
+                            });
 
-                            var div = document.querySelector( "#updatePasswordError" );
-                            div.style.display = "block";
                         }
                     },
                     function ( e )
                     {
-                        alert( e );
+                        Swal.fire({
+                            icon: 'warining',
+                            title: 'Oops...',
+                            text: 'There is an Error, Please Try again Later!',
+                            confirmButtonColor: '#d33',
+                            confirmButtonText: 'OK',
+                            allowOutsideClick: false
+                        });
                     }
             );
         }
     } );
     // END - TO SAVE CHANGED USER INFO . . .//
 
+
+    $(document).on("click","#btnSignOut",function()
+    {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'You have to Login again next time!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Sign Out!',
+            allowOutsideClick: false
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                $.post('/User/SignOut', function(response) {
+                    location.href="/User/SignIn";
+                }).fail(function(xhr, status, error) {
+                    // Handle errors if the request fails
+                    console.error('Error:', error);
+                });
+
+            } else {
+                Swal.fire(
+                  'Cancelled',
+                  'Your action has been cancelled.',
+                  'info'
+                );
+            }
+        });
+
+    });
 } );

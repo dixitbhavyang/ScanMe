@@ -123,7 +123,7 @@ namespace DashmixPractice.Controllers
                 Response.Cookies["Password"].Expires = DateTime.Now.AddDays(-1);
             }
             Session.Abandon();
-            return RedirectToAction("SignIn");
+            return Json(true);
         }
 
         [HttpPost]
@@ -149,7 +149,7 @@ namespace DashmixPractice.Controllers
                             Response.Cookies["Password"].Expires = DateTime.Now.AddDays(-1);
                         }
                         Session.Abandon();
-                        return Json("Updated Successfully");
+                        return Json(true);
                     }
                 }
                 else
@@ -191,9 +191,8 @@ namespace DashmixPractice.Controllers
                     if (r > 0)
                     {
                         Session["ProfilePicture"] = user.ProfilePicturePath;
-                        return Json("Updated Successfully");
-
                     }
+                    return Json(true);
                 }
             }
             return Json(false);
