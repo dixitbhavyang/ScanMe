@@ -320,7 +320,7 @@
     } );
     // END - TO SAVE CHANGED USER INFO . . .//
 
-
+    // START SIGN-OUT //
     $(document).on("click","#btnSignOut",function()
     {
         Swal.fire({
@@ -352,4 +352,5 @@
         });
 
     });
+    // END SIGN-OUT //
 } );

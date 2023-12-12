@@ -197,5 +197,26 @@ namespace DashmixPractice.Controllers
             }
             return Json(false);
         }
+
+        [HttpPost]
+        public ActionResult updateContactInformation(Contact_Information newInfo)
+        {
+            if (newInfo != null)
+            {
+                var user = _context.User.Where(model => model.Id == newInfo.User_Id).FirstOrDefault();
+                var contactInfo = _context.Contact_Information.Where(model => model.User_Id == newInfo.User_Id).FirstOrDefault();
+
+                contactInfo.Email = user.Email;
+                contactInfo.Phone = newInfo.Phone;
+                contactInfo.Address = newInfo.Address;
+
+                int r = _context.SaveChanges();
+                if (r>0)
+                {
+                    return Json(true);
+                }
+            }
+            return Json(false);
+        }
     }
 }

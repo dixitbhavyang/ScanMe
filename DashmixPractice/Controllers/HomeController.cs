@@ -1,4 +1,5 @@
 ﻿using DashmixPractice.Models;
+using DashmixPractice.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,8 +51,15 @@ namespace DashmixPractice.Controllers
                 string username = Session["Username"].ToString();
                 string password = Session["Password"].ToString();
                 var user = _context.User.Where(model => model.Username == username && model.Password == password).FirstOrDefault();
+                var contactInfo = _context.Contact_Information.Where(model => model.User_Id == user.Id).FirstOrDefault();
 
-                return View(user);
+                UserContactInformationViewModel viewModel = new UserContactInformationViewModel
+                {
+                    User = user,
+                    ContactInforamation = contactInfo
+                };
+
+                return View(viewModel);
             }
             return RedirectToAction("Home");
         }

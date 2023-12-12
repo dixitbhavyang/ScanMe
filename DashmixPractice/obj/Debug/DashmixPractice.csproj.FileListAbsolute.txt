@@ -88,3 +88,4 @@ C:\Users\C.E.H V10\Documents\ScanMe\DashmixPractice\obj\Debug\DashmixPractice.Mi
 C:\Users\C.E.H V10\Documents\ScanMe\DashmixPractice\obj\Debug\DashmixPractice.csproj.GenerateResource.Cache
 C:\Users\C.E.H V10\Documents\ScanMe\DashmixPractice\obj\Debug\DashmixPractice.dll
 C:\Users\C.E.H V10\Documents\ScanMe\DashmixPractice\obj\Debug\DashmixPractice.pdb
+C:\Users\C.E.H V10\Documents\ScanMe\DashmixPractice\obj\Debug\DashmixPractice.Migrations.RemovedDataAnnotaionsforUserModel.resources
