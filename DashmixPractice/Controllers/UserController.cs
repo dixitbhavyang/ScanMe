@@ -172,6 +172,7 @@ namespace DashmixPractice.Controllers
                 var user = _context.User.Where(model => model.Username == username && model.Password == password).FirstOrDefault();
                 if (user != null)
                 {
+                    user.Username = u.Username;
                     user.Name = u.Name;
                     user.Email = u.Email;
                     user.ConfirmPassword = user.Password;
@@ -190,6 +191,7 @@ namespace DashmixPractice.Controllers
                     int r = _context.SaveChanges();
                     if (r > 0)
                     {
+                        Session["Username"] = user.Username;
                         Session["ProfilePicture"] = user.ProfilePicturePath;
                     }
                     return Json(true);

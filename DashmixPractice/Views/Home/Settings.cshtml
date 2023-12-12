@@ -14,7 +14,7 @@
                 <img class="imgProfilePic img-avatar img-avatar128 img-avatar-thumb" src="@Model.User.ProfilePicturePath" alt="">
             </a>
             <div class="ms-3 flex-grow-1 text-center text-md-start my-3 my-md-0">
-                <h1 class="fs-4 fw-bold mb-1">@Model.User.Username</h1>
+                <h1 class="fs-4 fw-bold mb-1 username">@Model.User.Username</h1>
                 <h2 class="fs-sm fw-medium text-muted mb-0">
                     Edit Account
                 </h2>
@@ -37,12 +37,6 @@
                     <span class="d-none d-sm-inline">Password</span>
                 </button>
             </li>
-            @*<li class="nav-item">
-                    <button class="nav-link space-x-1" id="account-connections-tab" data-bs-toggle="tab" data-bs-target="#account-connections" role="tab" aria-controls="account-connections" aria-selected="false">
-                        <i class="fa fa-share-alt d-sm-none"></i>
-                        <span class="d-none d-sm-inline">Connections</span>
-                    </button>
-                </li>*@
             <li class="nav-item">
                 <button class="nav-link space-x-1" id="personal-information-tab" data-bs-toggle="tab" data-bs-target="#personal-information" role="tab" aria-controls="personal-information" aria-selected="false">
                     <i class="fa-solid fa-circle-info d-sm-none"></i>
@@ -71,7 +65,7 @@
                             </div>
                             <div class="mb-4">
                                 <label class="form-label">Username</label>
-                                <input type="text" readonly class="form-control" id="Username" name="Username" value="@Model.User.Username">
+                                <input type="text" class="form-control" id="Username" name="Username" value="@Model.User.Username">
                             </div>
                             <div class="mb-4">
                                 <label class="form-label" for="so-profile-name">Name</label>

@@ -64,6 +64,18 @@
     } );
     // END HIDE AND SHOW PASSWORD //
 
+    $( document ).on( "input","#Username", function ()
+    {
+        if ( $( "#Username" ).val() != "" )
+        {
+            $( "#Username" ).removeClass( "is-invalid" );
+        }
+        else
+        {
+            $( "#Username" ).attr( "placeholder", "Username is Required" );
+            $( "#Username" ).addClass( "is-invalid" );
+        }
+    } );
 
     $( document ).on( "input","#Name", function ()
     {
@@ -182,8 +194,7 @@
                                 confirmButtonText: 'OK'
                             });
                             $(".imgProfilePic").attr("src",$("#ProfilePicturePath").attr("src"));
-                            //var div = document.querySelector( "#updateProfileError" );
-                            //div.style.display = "none";
+                            $(".username").text($("#Username").val());
                         }
                         else
                         {
