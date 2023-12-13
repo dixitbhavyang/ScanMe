@@ -14,7 +14,7 @@
                 <img class="imgProfilePic img-avatar img-avatar128 img-avatar-thumb" src="@Model.User.ProfilePicturePath" alt="">
             </a>
             <div class="ms-3 flex-grow-1 text-center text-md-start my-3 my-md-0">
-                <h1 class="fs-4 fw-bold mb-1 username">@Model.User.Username</h1>
+                <h1 class="fs-4 fw-bold mb-1 username"> @Session["Username"] </h1>
                 <h2 class="fs-sm fw-medium text-muted mb-0">
                     Edit Account
                 </h2>
@@ -137,7 +137,7 @@
                     </div>
                     <div class="col-xl-6 order-xl-0">
                         <form method="POST" id="personalInformationForm">
-                            @Html.HiddenFor(model => model.ContactInforamation.User_Id)
+                            <input type="hidden" name="User_Id" id="User_Id" value="@Model.User.Id" />
                             <div class="mb-4">
                                 <label class="form-label" for="Phone">Contact Number</label>
                                 <div class="input-group input-group-lg">
@@ -150,7 +150,7 @@
                             <div class="row mb-4">
                                 <label class="form-label" for="Address">Address</label>
                                 <div class="input-group input-group-lg">
-                                    <textarea class="form-control" id="Address" rows="3" cols="5" name="Address" value="@(Model.ContactInforamation != null ? Model.ContactInforamation.Address : string.Empty)"></textarea>
+                                    <textarea class="form-control" id="Address" rows="3" cols="5" name="Address">@(Model.ContactInforamation != null ? Model.ContactInforamation.Address : string.Empty)</textarea>
                                     <span class="input-group-text">
                                         <i class="fa fa-location-dot"></i>
                                     </span>

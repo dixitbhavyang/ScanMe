@@ -329,6 +329,53 @@
             );
         }
     } );
+
+    $( document).on("click","#btnUpdateContactInformation" , function ()
+    {
+        debugger;
+        var formData = new FormData( $( "#personalInformationForm" )[0] );
+        postMethodWithFormData( "/User/UpdateContactInformation", formData,
+                function (res)
+                {
+                    debugger;
+                    //alert( res );
+                    if ( res == true)
+                    {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success !',
+                            text: 'Updated Successfully.',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK',
+                            allowOutsideClick: false
+                        });
+                    }
+                    else
+                    {
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Oops...',
+                            text: 'There is an Error, Please Try again Later!',
+                            confirmButtonColor: '#d33',
+                            confirmButtonText: 'OK',
+                            allowOutsideClick: false
+                        });
+
+                    }
+                },
+                function ( e )
+                {
+                    Swal.fire({
+                        icon: 'warining',
+                        title: 'Oops...',
+                        text: 'There is an Error, Please Try again Later!',
+                        confirmButtonColor: '#d33',
+                        confirmButtonText: 'OK',
+                        allowOutsideClick: false
+                    });
+                }
+        );
+    } );
     // END - TO SAVE CHANGED USER INFO . . .//
 
     // START SIGN-OUT //

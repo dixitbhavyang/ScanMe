@@ -201,22 +201,28 @@ namespace DashmixPractice.Controllers
         }
 
         [HttpPost]
-        public ActionResult updateContactInformation(Contact_Information newInfo)
+        public ActionResult UpdateContactInformation(Contact_Information newInfo)
         {
             if (newInfo != null)
             {
                 var user = _context.User.Where(model => model.Id == newInfo.User_Id).FirstOrDefault();
                 var contactInfo = _context.Contact_Information.Where(model => model.User_Id == newInfo.User_Id).FirstOrDefault();
 
-                contactInfo.Email = user.Email;
-                contactInfo.Phone = newInfo.Phone;
-                contactInfo.Address = newInfo.Address;
+                if (contactInfo != null)
+                {
+                    contactInfo.Email = user.Email;
+                    contactInfo.Phone = newInfo.Phone;
+                    contactInfo.Address = newInfo.Address;
+                }
+                else
+                {
+                    newInfo.Email = user.Email;
+                    newInfo.User = user;
+                    _context.Contact_Information.Add(newInfo);
+                }
 
                 int r = _context.SaveChanges();
-                if (r>0)
-                {
-                    return Json(true);
-                }
+                return Json(true);
             }
             return Json(false);
         }
