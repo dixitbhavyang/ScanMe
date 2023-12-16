@@ -3,7 +3,6 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <!-- Page Content -->
 <div class="content content-full content-boxed">
     <!-- Hero -->
@@ -141,11 +140,12 @@
                             <div class="mb-4">
                                 <label class="form-label" for="Phone">Contact Number</label>
                                 <div class="input-group input-group-lg">
-                                    <input type="number" class="form-control" id="Phone" maxlength="10" placeholder="XXXXXXXXXX" name="Phone" value="@(Model.ContactInforamation != null ? Model.ContactInforamation.Phone : string.Empty)">
+                                    <input type="tel" class="form-control" id="Phone" maxlength="10" onkeypress="return event.charCode >= 48 && event.charCode <= 57" placeholder="Enter Mobile Number" pattern="[0-9]+" name="Phone" value="@(Model.ContactInforamation != null ? Model.ContactInforamation.Phone : string.Empty)">
                                     <span class="input-group-text">
                                         <i class="fa fa-phone"></i>
                                     </span>
                                 </div>
+                                <div id="invalidPhoneNumber" class="text-danger mt-1 small fw-semibold" style="display:none">Invalid Phone Number</div>
                             </div>
                             <div class="row mb-4">
                                 <label class="form-label" for="Address">Address</label>

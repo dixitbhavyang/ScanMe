@@ -1,5 +1,25 @@
 ﻿$( document ).ready( function ()
 {
+    $(document).on("input","#username",function()
+    {
+        if ($("#username").val() != "") {
+            $("#showPreview").attr("src","https://www.instagram.com/"+$("#username").val()+"/embed/");
+        }
+    });
+
+    $("#btnShowPreview").click(function()
+    {
+        debugger;
+        if ($("#username").val() != "") {
+            $("#showPreview").attr("src","https://www.instagram.com/"+$("#username").val()+"/embed/");
+            $("#showPreview").attr("style","display:block");
+        }
+    });
+
+    $('.dropdown-item').click(function() {
+        var selectedValue = $(this).data('value');
+        $('#socialMediaDropdown').text(selectedValue);
+    });
 
     /// START PROFILE PICTURE ///
     $( document ).on("change", "#ProfilePicture", function ( e )
@@ -11,7 +31,7 @@
 
             reader.onload = function ( e )
             {
-                $( '#ProfilePicturePath' ).attr( 'src', e.target.result ); // Set image source
+                $( "#ProfilePicturePath" ).attr( "src", e.target.result ); // Set image source
             };
 
             reader.readAsDataURL( file ); // Read the file as a data URL
@@ -32,34 +52,34 @@
 
 
     //  HIDE AND SHOW PASSWORD //
-    $( '#Password' ).data( 'original-type-pswd', $( '#Password' ).attr( 'type' ) );
-    $( '#NewPassword' ).data( 'original-type-new-pswd', $( '#NewPassword' ).attr( 'type' ) );
-    $( '#ConfirmPassword' ).data( 'original-type-cpswd', $( '#ConfirmPassword' ).attr( 'type' ) );
+    $( "#Password" ).data( "original-type-pswd", $( "#Password" ).attr( "type" ) );
+    $( "#NewPassword" ).data( "original-type-new-pswd", $( "#NewPassword" ).attr( "type" ) );
+    $( "#ConfirmPassword" ).data( "original-type-cpswd", $( "#ConfirmPassword" ).attr( "type" ) );
 
     $( document ).on("click", "#showCurrentPassword" , function ()
     {
-        $( '#showCurrentPassword i' ).toggleClass( 'fa-eye fa-eye-slash' );
-        var passwordField = $( '#Password' );
-        var originalTypePassword = passwordField.data( 'original-type-pswd' );
-        passwordField.attr( 'type', passwordField.attr( 'type' ) === 'text' ? originalTypePassword : 'text' );
+        $( "#showCurrentPassword i" ).toggleClass( "fa-eye fa-eye-slash" );
+        var passwordField = $( "#Password" );
+        var originalTypePassword = passwordField.data( "original-type-pswd" );
+        passwordField.attr( "type", passwordField.attr( "type" ) === "text" ? originalTypePassword : "text" );
 
     } );
 
     $( document ).on("click","#showNewPassword", function ()
     {
-        $( '#showNewPassword i' ).toggleClass( 'fa-eye fa-eye-slash' );
-        var passwordField = $( '#NewPassword' );
-        var originalTypePassword = passwordField.data( 'original-type-new-pswd' );
-        passwordField.attr( 'type', passwordField.attr( 'type' ) === 'text' ? originalTypePassword : 'text' );
+        $( "#showNewPassword i" ).toggleClass( "fa-eye fa-eye-slash" );
+        var passwordField = $( "#NewPassword" );
+        var originalTypePassword = passwordField.data( "original-type-new-pswd" );
+        passwordField.attr( "type", passwordField.attr( "type" ) === "text" ? originalTypePassword : "text" );
 
     } );
 
     $( document ).on("click","#showNewPasswordConfirm", function ()
     {
-        $( '#showNewPasswordConfirm i' ).toggleClass( 'fa-eye fa-eye-slash' );
-        var passwordField = $( '#ConfirmPassword' );
-        var originalTypePassword = passwordField.data( 'original-type-cpswd' );
-        passwordField.attr( 'type', passwordField.attr( 'type' ) === 'text' ? originalTypePassword : 'text' );
+        $( "#showNewPasswordConfirm i" ).toggleClass( "fa-eye fa-eye-slash" );
+        var passwordField = $( "#ConfirmPassword" );
+        var originalTypePassword = passwordField.data( "original-type-cpswd" );
+        passwordField.attr( "type", passwordField.attr( "type" ) === "text" ? originalTypePassword : "text" );
 
     } );
     // END HIDE AND SHOW PASSWORD //
@@ -145,6 +165,22 @@
         }
     } );
 
+    $( document ).on( "input","#Phone", function ()
+    {
+        if ( $( "#Phone" ).val() != "" )
+        {
+            if (parseInt($("#Phone").val().length) < 10) 
+            {
+                $( "#Phone" ).addClass( "is-invalid" );
+                $("#invalidPhoneNumber").attr("style","display:block");
+            }
+            else
+            {
+                $( "#Phone" ).removeClass( "is-invalid" );
+                $("#invalidPhoneNumber").attr("style","display:none");
+            }
+        }
+    } );
 
     // TO SAVE CHANGED USER INFO . . .//
     function validateUserProfileControls()
@@ -171,7 +207,7 @@
     }
 
 
-    $(document).on( "click", '#btnUpdateProfile', function ()
+    $(document).on( "click", "#btnUpdateProfile", function ()
     {
         debugger;
         if ( validateUserProfileControls() )
@@ -187,11 +223,11 @@
                         if ( s == true)
                         {
                             Swal.fire({
-                                icon: 'success',
-                                title: 'Success!',
-                                text: 'Updated Successfully.',
-                                confirmButtonColor: '#3085d6',
-                                confirmButtonText: 'OK'
+                                icon: "success",
+                                title: "Success!",
+                                text: "Updated Successfully.",
+                                confirmButtonColor: "#3085d6",
+                                confirmButtonText: "OK"
                             });
                             $(".imgProfilePic").attr("src",$("#ProfilePicturePath").attr("src"));
                             $(".username").text($("#Username").val());
@@ -199,11 +235,11 @@
                         else
                         {
                             Swal.fire({
-                                icon: 'warning',
-                                title: 'Oops...',
-                                text: 'There is an Error, Please Try again Later!',
-                                confirmButtonColor: '#d33',
-                                confirmButtonText: 'OK',
+                                icon: "warning",
+                                title: "Oops...",
+                                text: "There is an Error, Please Try again Later!",
+                                confirmButtonColor: "#d33",
+                                confirmButtonText: "OK",
                                 allowOutsideClick: false
                             });
                             $("ProfilePicturePath").attr("src",previousProfilePicPath);
@@ -214,11 +250,11 @@
                     function ( e )
                     {
                         Swal.fire({
-                            icon: 'warning',
-                            title: 'Oops...',
-                            text: 'There is an Error, Please Try again Later!',
-                            confirmButtonColor: '#d33',
-                            confirmButtonText: 'OK',
+                            icon: "warning",
+                            title: "Oops...",
+                            text: "There is an Error, Please Try again Later!",
+                            confirmButtonColor: "#d33",
+                            confirmButtonText: "OK",
                             allowOutsideClick: false
                         });
                         $("ProfilePicturePath").attr("src",previousProfilePicPath);
@@ -277,11 +313,11 @@
                         if ( res == true)
                         {
                             Swal.fire({
-                                icon: 'success',
-                                title: 'Password Updated Successfully !',
-                                text: 'You have to Login again with New Password',
-                                confirmButtonColor: '#3085d6',
-                                confirmButtonText: 'OK',
+                                icon: "success",
+                                title: "Password Updated Successfully !",
+                                text: "You have to Login again with New Password",
+                                confirmButtonColor: "#3085d6",
+                                confirmButtonText: "OK",
                                 allowOutsideClick: false
                             }).then((result) => {
                                 
@@ -293,11 +329,11 @@
                         else if ( res == "Incorrect Password" )
                         {
                             Swal.fire({
-                                icon: 'error',
-                                title: 'Incorrect Password !',
-                                text: 'Check your Password!',
-                                confirmButtonColor: '#d33',
-                                confirmButtonText: 'OK',
+                                icon: "error",
+                                title: "Incorrect Password !",
+                                text: "Check your Password!",
+                                confirmButtonColor: "#d33",
+                                confirmButtonText: "OK",
                                 allowOutsideClick: false
                             });
 
@@ -305,11 +341,11 @@
                         else
                         {
                             Swal.fire({
-                                icon: 'warning',
-                                title: 'Oops...',
-                                text: 'There is an Error, Please Try again Later!',
-                                confirmButtonColor: '#d33',
-                                confirmButtonText: 'OK',
+                                icon: "warning",
+                                title: "Oops...",
+                                text: "There is an Error, Please Try again Later!",
+                                confirmButtonColor: "#d33",
+                                confirmButtonText: "OK",
                                 allowOutsideClick: false
                             });
 
@@ -318,11 +354,11 @@
                     function ( e )
                     {
                         Swal.fire({
-                            icon: 'warining',
-                            title: 'Oops...',
-                            text: 'There is an Error, Please Try again Later!',
-                            confirmButtonColor: '#d33',
-                            confirmButtonText: 'OK',
+                            icon: "warining",
+                            title: "Oops...",
+                            text: "There is an Error, Please Try again Later!",
+                            confirmButtonColor: "#d33",
+                            confirmButtonText: "OK",
                             allowOutsideClick: false
                         });
                     }
@@ -342,22 +378,22 @@
                     if ( res == true)
                     {
                         Swal.fire({
-                            icon: 'success',
-                            title: 'Success !',
-                            text: 'Updated Successfully.',
-                            confirmButtonColor: '#3085d6',
-                            confirmButtonText: 'OK',
+                            icon: "success",
+                            title: "Success !",
+                            text: "Updated Successfully.",
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText: "OK",
                             allowOutsideClick: false
                         });
                     }
                     else
                     {
                         Swal.fire({
-                            icon: 'warning',
-                            title: 'Oops...',
-                            text: 'There is an Error, Please Try again Later!',
-                            confirmButtonColor: '#d33',
-                            confirmButtonText: 'OK',
+                            icon: "warning",
+                            title: "Oops...",
+                            text: "There is an Error, Please Try again Later!",
+                            confirmButtonColor: "#d33",
+                            confirmButtonText: "OK",
                             allowOutsideClick: false
                         });
 
@@ -366,11 +402,11 @@
                 function ( e )
                 {
                     Swal.fire({
-                        icon: 'warining',
-                        title: 'Oops...',
-                        text: 'There is an Error, Please Try again Later!',
-                        confirmButtonColor: '#d33',
-                        confirmButtonText: 'OK',
+                        icon: "warining",
+                        title: "Oops...",
+                        text: "There is an Error, Please Try again Later!",
+                        confirmButtonColor: "#d33",
+                        confirmButtonText: "OK",
                         allowOutsideClick: false
                     });
                 }
@@ -382,29 +418,29 @@
     $(document).on("click","#btnSignOut",function()
     {
         Swal.fire({
-            title: 'Are you sure?',
-            text: 'You have to Login again next time!',
-            icon: 'warning',
+            title: "Are you sure?",
+            text: "You have to Login again next time!",
+            icon: "warning",
             showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, Sign Out!',
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Sign Out!",
             allowOutsideClick: false
         }).then((result) => {
             if (result.isConfirmed) {
 
-                $.post('/User/SignOut', function(response) {
+                $.post("/User/SignOut", function(response) {
                     location.href="/User/SignIn";
                 }).fail(function(xhr, status, error) {
                     // Handle errors if the request fails
-                    console.error('Error:', error);
+                    console.error("Error:", error);
                 });
 
             } else {
                 Swal.fire(
-                  'Cancelled',
-                  'Your action has been cancelled.',
-                  'info'
+                  "Cancelled",
+                  "Your action has been cancelled.",
+                  "info"
                 );
             }
         });
