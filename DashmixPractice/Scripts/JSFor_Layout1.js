@@ -1,25 +1,128 @@
 ﻿$( document ).ready( function ()
 {
-    $(document).on("input","#username",function()
+    $( document ).on( "input","#Title", function ()
     {
-        if ($("#username").val() != "") {
-            $("#showPreview").attr("src","https://www.instagram.com/"+$("#username").val()+"/embed/");
+        if ( $( "#Title" ).val() != "" )
+        {
+            $( "#Title" ).removeClass( "is-invalid" );
+        }
+        else
+        {
+            $( "#Title" ).addClass( "is-invalid" );
+        }
+    } );
+
+    $( document ).on( "input","#Link", function ()
+    {
+        if ( $( "#Link" ).val() != "" )
+        {
+            $( "#Link" ).removeClass( "is-invalid" );
+        }
+        else
+        {
+            $( "#Link" ).addClass( "is-invalid" );
+        }
+    } );
+
+    function isSocialConnectionControlsValid()
+    {
+        var title = $("#Title").val();
+        var platform = $("#Platform").text().trim();
+        var link = $("#Link").val();
+
+        if (title == "") 
+        {
+            $("#Title").addClass("is-invalid").focus();
+            return false;
+        }
+        else if (platform == "Platform") 
+        {
+            $("#Title").removeClass("is-invalid");
+            Swal.fire({
+                icon: "warning",
+                title: "Please Select Platform !",
+                confirmButtonColor: "#d33",
+                confirmButtonText: "OK",
+                allowOutsideClick: false
+            });
+            return false;
+        }
+        else if (link == "") 
+        {
+            $("#Title").removeClass("is-invalid");
+            $("#Link").addClass("is-invalid").focus();
+        }
+        else if (isValidURL(link) == false) 
+        {
+            Swal.fire({
+                icon: "warning",
+                title: "Invalid URL !",
+                text: "Please Enter a Valid URL",
+                confirmButtonColor: "#d33",
+                confirmButtonText: "OK",
+                allowOutsideClick: false
+            });
+            return false;
+        }
+        else
+        {
+            $("#Title").removeClass("is-invalid");
+            $("#Link").removeClass("is-invalid");
+            return true;
+        }
+    }
+
+    function isValidURL(url) {
+        // Regular expression for URL validation
+        var urlPattern = new RegExp('^(https?:\\/\\/)?' + // Protocol (optional)
+            '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // Domain name
+            '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR IP address
+            '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // Port and path (optional)
+            '(\\?[;&a-z\\d%_.~+=-]*)?' + // Query string (optional)
+            '(\\#[-a-z\\d_]*)?$', 'i'); // Fragment locator (optional)
+
+        return urlPattern.test(url);
+    }
+
+    $("#btnTestLink").click(function()
+    {
+        if ($("#Link").val() != "") 
+        {
+            if (isValidURL($("#Link").val())) 
+            {
+                window.open($("#Link").val(),"_blank");
+            }
+            else
+            {
+                Swal.fire({
+                    icon: "warning",
+                    title: "Invalid URL !",
+                    text: "Please Enter a Valid URL",
+                    confirmButtonColor: "#d33",
+                    confirmButtonText: "OK",
+                    allowOutsideClick: false
+                });
+            }
         }
     });
 
-    $("#btnShowPreview").click(function()
+
+    $("#btnAddSocialConnection").click(function()
     {
-        debugger;
-        if ($("#username").val() != "") {
-            $("#showPreview").attr("src","https://www.instagram.com/"+$("#username").val()+"/embed/");
-            $("#showPreview").attr("style","display:block");
+        if (isSocialConnectionControlsValid()) 
+        {
+    
         }
     });
 
-    $('.dropdown-item').click(function() {
+    // SOCIAL MEDIA DROPDOWN TEXT ///
+    $('.dropdown-item').click(function() 
+    {
         var selectedValue = $(this).data('value');
-        $('#socialMediaDropdown').text(selectedValue);
+        $('#Platform').text(selectedValue);
     });
+    // SOCIAL MEDIA DROPDOWN TEXT ///
+
 
     /// START PROFILE PICTURE ///
     $( document ).on("change", "#ProfilePicture", function ( e )
@@ -83,6 +186,7 @@
 
     } );
     // END HIDE AND SHOW PASSWORD //
+
 
     $( document ).on( "input","#Username", function ()
     {
@@ -182,6 +286,7 @@
         }
     } );
 
+
     // TO SAVE CHANGED USER INFO . . .//
     function validateUserProfileControls()
     {
@@ -206,7 +311,6 @@
         return true;
     }
 
-
     $(document).on( "click", "#btnUpdateProfile", function ()
     {
         debugger;
@@ -230,7 +334,7 @@
                                 confirmButtonText: "OK"
                             });
                             $(".imgProfilePic").attr("src",$("#ProfilePicturePath").attr("src"));
-                            $(".username").text($("#Username").val());
+                            $(".socialConnectionUsername").text($("#Username").val());
                         }
                         else
                         {

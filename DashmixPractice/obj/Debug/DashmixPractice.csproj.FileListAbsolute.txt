@@ -89,3 +89,7 @@ C:\Users\C.E.H V10\Documents\ScanMe\DashmixPractice\obj\Debug\DashmixPractice.cs
 C:\Users\C.E.H V10\Documents\ScanMe\DashmixPractice\obj\Debug\DashmixPractice.dll
 C:\Users\C.E.H V10\Documents\ScanMe\DashmixPractice\obj\Debug\DashmixPractice.pdb
 C:\Users\C.E.H V10\Documents\ScanMe\DashmixPractice\obj\Debug\DashmixPractice.Migrations.RemovedDataAnnotaionsforUserModel.resources
+C:\Users\C.E.H V10\Documents\ScanMe\DashmixPractice\obj\Debug\DashmixPractice.Migrations.ChangedTableNames.resources
+C:\Users\C.E.H V10\Documents\ScanMe\DashmixPractice\obj\Debug\DashmixPractice.Migrations.AddColumnTitleinSocial_Connections.resources
+C:\Users\C.E.H V10\Documents\ScanMe\DashmixPractice\obj\Debug\DashmixPractice.Migrations.RenameColunmLinktoUsernameinSocial_Connections.resources
+C:\Users\C.E.H V10\Documents\ScanMe\DashmixPractice\obj\Debug\DashmixPractice.Migrations.RenameColumnUsernametoLinkinSocial_Connections.resources

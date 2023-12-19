@@ -35,7 +35,7 @@ namespace DashmixPractice.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult SocialMediaLinks()
+        public ActionResult SocialConnections()
         {
             if (Session["Username"] != null && Session["Password"] != null)
             {
