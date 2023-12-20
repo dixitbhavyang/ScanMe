@@ -111,7 +111,49 @@
     {
         if (isSocialConnectionControlsValid()) 
         {
-    
+            debugger;
+            var formData = new FormData($( "#socialConnectionForm" )[0] );
+            formData.append("Platform",$("#Platform").text());
+
+            postMethodWithFormData("/Home/CreateSocialConnection",formData,
+                function sucess(result)
+                {
+                    if (result == true) 
+                    {
+                        Swal.fire({
+                            title : "Success !",
+                            text : "Connection Added Successfully . . .",
+                            icon : "success",
+                            confirmButtonColor: "#3085d6",
+                            confirmButtonText : "OK",
+                            allowOutsideClick : false
+                        });
+
+                        $("#Title").val("");
+                        $("#Platform").text("Platform");
+                        $("#Link").val("");
+                    }
+                    else
+                    {
+                        Swal.fire({
+                            title : "Sorry !",
+                            text : "Cannot Add Connection, Please Try again later . . .",
+                            icon : "error",
+                            confirmButtonColor: "red",
+                            allowOutsideClick : false
+                        });
+                    }
+                },
+                function error(result)
+                {
+                    Swal.fire({
+                        title : "Sorry !",
+                        text : "There is an Error, Please Try again later . . .",
+                        icon : "error",
+                        confirmButtonColor: "red",
+                        allowOutsideClick : false
+                    });
+                });
         }
     });
 

@@ -28,7 +28,8 @@
             {
                 var div = document.querySelector( "#signUpResponse" );
                 div.style.display = "block";
-            } else
+            }
+            else
             {
                 location.href = "/Home/Index";
             }
@@ -113,15 +114,6 @@
                                     <!-- For more info and examples you can check out https://github.com/jzaefferer/jquery-validation -->
                                     @using (Ajax.BeginForm("SignUp", null, new AjaxOptions { HttpMethod = "POST", OnComplete = "onSignUpComeplete" }, new { @class = "js-validation-signup" }))
                                     {
-                                        <div class="mb-4">
-                                            <label class="form-label">Your Profile Picture</label>
-                                            <div class="push">
-                                                <img class="img-avatar" id="profilePictureShow" src="/assets/media/avatars/avatar10.jpg" alt="">
-                                                <button type="button" id="clearPrfofilePicture" class="btn btn-sm text-danger">Remove <i class="fa-solid fa-2 fa-ban"></i> </button>
-                                            </div>
-                                            <label class="form-label" for="dm-profile-edit-avatar">Choose your Profile picture</label>
-                                            <input class="form-control" type="file" id="profilePicture" name="profilePicture">
-                                        </div>
                                         <div class="mb-4">
                                             <div class="input-group input-group-lg">
                                                 @Html.TextBoxFor(model => model.Name, new { @class = "form-control", placeholder = "Name" })

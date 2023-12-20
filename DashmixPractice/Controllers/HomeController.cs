@@ -39,9 +39,25 @@ namespace DashmixPractice.Controllers
         {
             if (Session["Username"] != null && Session["Password"] != null)
             {
-                return View();
+                int userId = Convert.ToInt32(Session["UserId"]);
+                var socialCon = _context.Social_Connections.Where(model => model.User_Id == userId).FirstOrDefault();
+                return View(socialCon);
             }
             return RedirectToAction("Home");
+        }
+
+        [HttpPost]
+        public ActionResult CreateSocialConnection(Social_Connections newCon)
+        {
+            var user = _context.User.Where(model => model.Id == newCon.User_Id).FirstOrDefault();
+            newCon.User = user;
+            _context.Social_Connections.Add(newCon);
+            int r = _context.SaveChanges();
+            if (r > 0)
+            {
+                return Json(true);
+            }
+            return Json(false);
         }
 
         public ActionResult Settings()

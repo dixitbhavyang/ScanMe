@@ -51,6 +51,7 @@ namespace DashmixPractice.Controllers
                 var user = _context.User.Where(model => model.Username == username && model.Password == decryptedPassword).FirstOrDefault();
                 if (user != null)
                 {
+                    Session["UserId"] = user.Id;
                     Session["Username"] = user.Username.ToString();
                     Session["ProfilePicture"] = user.ProfilePicturePath.ToString();
                     Session["Password"] = user.Password.ToString();
@@ -82,6 +83,7 @@ namespace DashmixPractice.Controllers
                         Response.Cookies["Username"].Expires = DateTime.Now.AddDays(-1);
                         Response.Cookies["Password"].Expires = DateTime.Now.AddDays(-1);
                     }
+                    Session["UserId"] = user.Id;
                     Session["Username"] = user.Username.ToString();
                     Session["ProfilePicture"] = user.ProfilePicturePath.ToString();
                     Session["Password"] = user.Password.ToString();
@@ -96,10 +98,15 @@ namespace DashmixPractice.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (u.ProfilePicturePath == null)
+                {
+                    u.ProfilePicturePath = "/assets/media/avatars/avatar10.jpg";
+                }
                 _context.User.Add(u);
                 int i = _context.SaveChanges();
                 if (i > 0)
                 {
+                    Session["UserId"] = u.Id;
                     Session["Username"] = u.Username.ToString();
                     Session["ProfilePicture"] = u.ProfilePicturePath.ToString();
                     Session["Password"] = u.Password.ToString();
@@ -131,10 +138,12 @@ namespace DashmixPractice.Controllers
         {
             if (Session["Username"] != null && u.Password != null)
             {
-                string username;
-                username = Session["Username"].ToString();
+                //string username;
+                //username = Session["Username"].ToString();
+                int userId = Convert.ToInt32(Session["UserId"]);
 
-                var user = _context.User.Where(model => model.Username == username && model.Password == u.Password).FirstOrDefault();
+                //var user = _context.User.Where(model => model.Username == username && model.Password == u.Password).FirstOrDefault();
+                var user = _context.User.Where(model => model.Id == userId).FirstOrDefault();
                 if (user != null)
                 {
                     user.Password = u.ConfirmPassword;
@@ -168,8 +177,10 @@ namespace DashmixPractice.Controllers
                 string password, username, profilePicturePath;
                 username = Session["Username"].ToString();
                 password = Session["Password"].ToString();
+                int userId = Convert.ToInt32(Session["UserId"]);
 
-                var user = _context.User.Where(model => model.Username == username && model.Password == password).FirstOrDefault();
+                //var user = _context.User.Where(model => model.Username == username && model.Password == password).FirstOrDefault();
+                var user = _context.User.Where(model => model.Id == userId).FirstOrDefault();
                 if (user != null)
                 {
                     user.Username = u.Username;
