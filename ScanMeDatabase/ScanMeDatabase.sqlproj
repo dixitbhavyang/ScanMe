@@ -68,9 +68,12 @@
     <Build Include="dbo\Tables\QRCodes.sql" />
     <Build Include="dbo\Tables\QRCode_Template.sql" />
     <Build Include="dbo\Tables\Digital_Card.sql" />
-    <Build Include="dbo\Tables\Digital_Card_Template.sql" />
     <Build Include="dbo\Tables\Digital_Card_Details.sql" />
     <Build Include="dbo\Tables\Contact_Information.sql" />
     <Build Include="dbo\Tables\Social_Media_Links.sql" />
+    <Build Include="dbo\Tables\Social_Connections.sql" />
+    <Build Include="dbo\Tables\Business_Card_Template.sql" />
+    <Build Include="dbo\Tables\Business_Card_Details.sql" />
+    <Build Include="dbo\Tables\Business_Card.sql" />
   </ItemGroup>
 </Project>
