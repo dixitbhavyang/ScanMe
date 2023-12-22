@@ -1,0 +1,41 @@
+﻿@model List<IGrouping<string, DashmixPractice.Models.Social_Connections>>
+
+<thead>
+    <tr>
+        <th style="width: 30px;"></th>
+        <th></th>
+    </tr>
+</thead>
+@if (Model != null)
+{
+    foreach (var platformGroup in Model)
+    {
+        int i = 1;
+        <tbody class="js-table-sections-header">
+            <tr>
+                <td class="text-center">
+                    <i class="fa fa-angle-right text-muted"></i>
+                </td>
+                <td class="fw-semibold">
+                    <i class="fab fa-@platformGroup.Key.ToLower()"></i>  @platformGroup.Key
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+        <tbody class="fs-sm">
+            @foreach (var record in platformGroup)
+            {
+                <tr>
+                    <td></td>
+                    <td class="fw-semibold text-center">@i</td>
+                    <td class="fw-semibold">@record.Title</td>
+                    <td><a class="link-primary" href="@record.Link" target="_blank">@record.Link</a></td>
+                </tr>
+                i++;
+            }
+        </tbody>
+    }
+
+}
+

@@ -1,5 +1,19 @@
 ﻿$( document ).ready( function ()
 {
+    function extractUsernameFromLink(link) {
+        // Regular expression to extract username
+        var usernameRegex = /(?:https?:\/\/)?(?:www\.)?.*?\/([^\/?#]+)(?:[\/?#]|$)/i;
+
+        // Match the username pattern from the URL
+        var match = link.match(usernameRegex);
+
+        // Check if there is a match and extract the username
+        var username = match ? match[1] : 'Unable to extract username';
+
+        $("#connectionUsername").val(username);
+        $("#connectionUsername").attr("readonly",true);
+    }
+
     $( document ).on( "input","#Title", function ()
     {
         if ( $( "#Title" ).val() != "" )
@@ -17,6 +31,7 @@
         if ( $( "#Link" ).val() != "" )
         {
             $( "#Link" ).removeClass( "is-invalid" );
+            extractUsernameFromLink($("#Link").val());
         }
         else
         {
@@ -127,6 +142,21 @@
                             confirmButtonColor: "#3085d6",
                             confirmButtonText : "OK",
                             allowOutsideClick : false
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+
+                                debugger;
+                                postMethod("/Home/RetriveSocialConnections",{User_Id : $("#User_Id").val()},
+                                    function success(successResult)
+                                    {
+                                        if (successResult != false) 
+                                        {
+                                            $("#socialConnectionsListTable").html(successResult);
+                                        }   
+                                    },
+                                );
+
+                            }
                         });
 
                         $("#Title").val("");
@@ -144,16 +174,16 @@
                         });
                     }
                 },
-                function error(result)
-                {
-                    Swal.fire({
-                        title : "Sorry !",
-                        text : "There is an Error, Please Try again later . . .",
-                        icon : "error",
-                        confirmButtonColor: "red",
-                        allowOutsideClick : false
-                    });
-                });
+        function error(result)
+        {
+            Swal.fire({
+                title : "Sorry !",
+                text : "There is an Error, Please Try again later . . .",
+                icon : "error",
+                confirmButtonColor: "red",
+                allowOutsideClick : false
+            });
+        });
         }
     });
 

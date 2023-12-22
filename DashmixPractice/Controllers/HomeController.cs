@@ -40,8 +40,13 @@ namespace DashmixPractice.Controllers
             if (Session["Username"] != null && Session["Password"] != null)
             {
                 int userId = Convert.ToInt32(Session["UserId"]);
-                var socialCon = _context.Social_Connections.Where(model => model.User_Id == userId).FirstOrDefault();
-                return View(socialCon);
+                List<Social_Connections> socialConnectionsList = _context.Social_Connections.Where(model => model.User_Id == userId).ToList();
+
+                var groupedByPlatform = socialConnectionsList
+                            .GroupBy(connection => connection.Platform)
+                            .ToList();
+
+                return View(groupedByPlatform);
             }
             return RedirectToAction("Home");
         }
@@ -56,6 +61,21 @@ namespace DashmixPractice.Controllers
             if (r > 0)
             {
                 return Json(true);
+            }
+            return Json(false);
+        }
+
+        [HttpPost]
+        public ActionResult RetriveSocialConnections(int User_Id)
+        {
+            List<Social_Connections> socialConnectionsList = _context.Social_Connections.Where(model => model.User_Id == User_Id).ToList();
+
+            if (socialConnectionsList != null)
+            {
+                var groupedByPlatform = socialConnectionsList
+                        .GroupBy(connection => connection.Platform)
+                        .ToList();
+                return PartialView("_SocialConnectionsList", groupedByPlatform);
             }
             return Json(false);
         }

@@ -10,3 +10,14 @@
         error: error
     } );
 }
+
+function postMethod( url, data, success, error )
+{
+    $.ajax( {
+        type: 'POST',
+        url: url, // Replace with your server-side endpoint
+        data: data, // Send integer value as data
+        success: success,
+        error: error
+    } );
+}
